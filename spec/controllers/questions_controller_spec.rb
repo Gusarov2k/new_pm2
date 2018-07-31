@@ -68,4 +68,22 @@ RSpec.describe QuestionsController, type: :controller do
 			expect(response).to render_template :edit
 		end
 	end
+
+	describe 'POST #create' do
+		# Два пути если успешно создается объект то один если нет то другой
+		
+		# Контекст это тоже что и describe просто так более наглядно разделять внутри describe
+		context 'with valid attributes' do
+			it 'saves the new question in the database' do
+				# attributes_for(:question) возвращает хешь из созданной нами фабрики
+				# Т.е. мы ожидаем что код который передается внутри {} изменит (to change) Question, :count на 1
+				expect{ post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
+			end
+			it 'redirects to show view'	do
+				post :create, question: attributes_for(:question)
+				expect(response).to redirect_to question_path(assigns(:question))
+			end
+		end
+
+	end
 end
