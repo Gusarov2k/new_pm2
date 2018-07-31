@@ -30,7 +30,7 @@ RSpec.describe QuestionsController, type: :controller do
 
 		it 'assings the requested question to @question'do
 			get :show, id: question
-			expect(assings(:question)).to eq question
+			expect(assigns(:question)).to eq question
 		end
 
 		it 'renders show view' do
