@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
+
+	let(:question) { create(:question) }
+
+
 	describe 'GET #index' do
 		# Метод let назначение переменных в тестах
 		# Данный метод выполняется только когда вызывается и далее сохраняет эти значения для последующего вызова
@@ -25,8 +29,6 @@ RSpec.describe QuestionsController, type: :controller do
 	end
 
 	describe 'GET #show' do
-
-		let(:question) { create(:question) }
 
 		before { get :show, id: question }
 
@@ -55,7 +57,7 @@ RSpec.describe QuestionsController, type: :controller do
 	end
 
 	describe 'GET #edit' do
-		let(:question) { create(:question) }
+		
 		before { get :edit, id: question }
 
 		it 'assings the requested question to @question'do
