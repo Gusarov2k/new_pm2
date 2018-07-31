@@ -98,4 +98,26 @@ RSpec.describe QuestionsController, type: :controller do
 		end
 
 	end
+
+	describe 'PATCH #update' do
+		context 'valid attributes' do
+			it 'assigns the requested question to @question' do
+				patch :update, id: question, question: attributes_for(:question)
+				expect(assigns(:question)).to eq question
+			end
+
+			it 'changes question attributes' do
+				patch :update, id: question, question: { title: 'new title', body: 'new body' }
+				# Перезагрузка что бы не взяло старые данные из хеша
+				question.reload
+				expect(question.title).to eq 'new title'
+				expect(question.body).to eq 'new body'
+			end
+
+			it 'redirects to the updated question' do
+				patch :update, id: question, question: attributes_for(:question)
+				expect(response).to redirect_to question
+			end
+		end
+	end
 end
