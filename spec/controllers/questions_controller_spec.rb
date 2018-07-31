@@ -85,5 +85,16 @@ RSpec.describe QuestionsController, type: :controller do
 			end
 		end
 
+		# Если неправильные атрибуты
+		context 'with invalid attributes' do
+			it 'does not save the question' do
+				expect{ post :create, question: attributes_for(:invalid_question) }.to_not change(Question, :count)
+			end
+
+			it 're-renders new view' do
+				
+			end
+		end
+
 	end
 end
