@@ -119,5 +119,22 @@ RSpec.describe QuestionsController, type: :controller do
 				expect(response).to redirect_to question
 			end
 		end
+
+		context 'invalid attributes' do
+
+			before { patch :update, id: question, question: { title: 'new title', body: nil } }
+
+			it 'does not change question attributes' do
+				
+				# Перезагрузка что бы не взяло старые данные из хеша
+				question.reload
+				expect(question.title).to eq 'MyString'
+				expect(question.body).to eq 'MyText'
+			end
+
+			it 're-renders edit view' do
+				expect(response).to render_template :edit
+			end
+		end
 	end
 end
