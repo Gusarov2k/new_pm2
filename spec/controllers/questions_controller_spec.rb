@@ -24,4 +24,19 @@ RSpec.describe QuestionsController, type: :controller do
 		end
 	end
 
+	describe 'GET #show' do
+
+		let(:question) { create(:question) }
+
+		it 'assings the requested question to @question'do
+			get :show, id: question
+			expect(assings(:question)).to eq question
+		end
+
+		it 'renders show view' do
+			get :show, id: question
+			expect(response).to render_template :show
+		end
+	end
+
 end
