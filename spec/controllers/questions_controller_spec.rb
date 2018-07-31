@@ -39,4 +39,19 @@ RSpec.describe QuestionsController, type: :controller do
 		end
 	end
 
+	describe 'GET #new' do
+
+		before { get :new }
+
+		it 'assigns a new Question to @question' do
+			#Проверка на то что так переменная которая находиться в нутри переменной question созданный экземпляр
+			# класса Question
+			expect(assigns(:question)).to be_a_new(Question)
+		end		
+
+		it 'renders new view' do
+			expect(response).to render_template :new
+		end
+	end
+
 end
